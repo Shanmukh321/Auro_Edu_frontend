@@ -6,7 +6,6 @@ import ThemeToggle from './ThemeToggle';
 import '../globals.css';
 import ReactMarkdown from 'react-markdown';
 import EmojiPicker from 'emoji-picker-react';
-import { i } from 'framer-motion/client';
 
 
 export default function Chat() {
