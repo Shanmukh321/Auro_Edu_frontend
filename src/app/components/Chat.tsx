@@ -113,26 +113,26 @@ export default function Chat() {
   }
   return (
     <div>
-    <div className="h-screen flex flex-col p-20 bg-sky-200 dark:bg-gray-900">
-      <div className="flex justify-between mb-4 dark:bg-gray-900 dark:text-white subpixel-antialiased font-bold font-mono text-4xl tracking-wider">
-        <h1 className="text-violet-900 bebas-neue-regular dark:text-red-900 dark:montserrat-underline">Edu-Chat Application</h1>
-        <p>User : {userStatus}</p>
+    <div className="h-screen flex flex-col p-10 bg-yellow-400/20 dark:bg-black">
+      <div className="flex justify-between mb-4 dark:bg-transparent dark:text-white subpixel-antialiased font-bold font-mono text-4xl tracking-wider">
+        <h1 className="text-slate-950 bebas-neue-regular dark:text-neutral-400 dark:montserrat-underline">Edu-Chat Application</h1>
+        <p className="text-violet-900 text-base bebas-neue-regular dark:text-cyan-400 dark:montserrat-underline">User: {userStatus}</p>
       </div>
       <div className="flex justify-end mb-4">
-        <button className="p-2 bg-red-700 mr-1 text-white rounded hover:bg-red-600 transition" onClick={clearmessages}> 
+        <button className="p-2 bg-blue-900 mr-1 text-white rounded-xl hover:bg-red-900 transition" onClick={clearmessages}> 
             Clear Chat
         </button>
         <ThemeToggle />
       </div>
-      <div className="flex-1 overflow-y-auto p-1">
+      <div className="flex-1 overflow-y-auto p-20">
         {messages.map((msg) => (
           <motion.div
             key={msg.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 1 }}
             transition={{ type: "spring" }}
-            className={`pl-4 pt-1 pb-1 mb-2 break-words text-pretty rounded ${
-              msg.sender === 'User' ? 'bg-zinc-700 text-white dark:bg-red-800' : 'bg-gray-400 dark:bg-gray-800 dark:text-white'
+            className={`pl-4 pt-1 pb-1 mb-2 break-words text-pretty rounded-2xl ${
+              msg.sender === 'User' ? 'bg-emerald-900/75 border-2 border-black text-slate-100 dark:bg-teal-900 dark:text-slate-300'  : 'bg-teal-300/30 border-2 border-black text-gray-900 dark:bg-zinc-900 dark:text-slate-300'
             }`}
             onClick={() => edit(msg)}
           >
@@ -148,7 +148,7 @@ export default function Chat() {
                 }
               }}
               rows={1}
-              className="w-full p-1 bg-gray-500 rounded text-white outline-none dark:bg-red-500"
+              className="w-full p-1 bg-teal-900/90 rounded-xl text-white outline-none dark:bg-teal-700"
               autoFocus
             />
             ) : <ReactMarkdown>{msg.text}</ReactMarkdown> }
@@ -156,7 +156,7 @@ export default function Chat() {
             <span className="text-sm opacity-70">
               {msgStatusIcon(msg.status)}
               {msg.status === 'read' && msg.sender === 'User' ? (
-                <span className="text-blue-500">✓✓</span>
+                <span className="text-red-500">✓✓</span>
               ) : null}
             </span>
           </motion.div>
@@ -187,14 +187,14 @@ export default function Chat() {
         value={input}
         onChange={userHandling}
         onKeyDown={handleKeys}
-        className="p-3 mt-2 flex-1 rounded border-2 placeholder-zinc-900 border border-zinc-600 bg-gray-400 dark:bg-gray-900 dark:text-white dark:border-red-800 dark:placeholder-red-600"
+        className="p-3 mt-2 flex-1 rounded-3xl border-2 placeholder-stone-950 border border-amber-900/20 bg-amber-900/40 dark:bg-neutral-800 dark:text-slate-200 dark:border-teal-700 dark:border-e dark:placeholder-zinc-400"
         placeholder="Start the Discussion!"
         rows={1}
       />
-      <div className={`absolute bottom-2 right-12 text-sm ${input.length > MAX_CHARS ? 'text-red-500' : 'text-gray-500'}`}>
+      <div className={`absolute bottom-2 right-12 text-sm ${input.length > MAX_CHARS ? 'text-red-500' : 'text-gray-400'}`}>
           {input.length}/{MAX_CHARS}
       </div>
-      <button onClick={() => setShowEmojiPicker(!showEmojiPicker)} className="relative mt-2 p-3 rounded border-2 left-2 placeholder-zinc-900 border border-zinc-600 bg-gray-400 dark:bg-gray-900 dark:text-white dark:border-red-800 dark:placeholder-red-600">😊
+      <button onClick={() => setShowEmojiPicker(!showEmojiPicker)} className="relative mt-2 p-3 rounded-3xl border-2 border-amber-900/20 left-2 placeholder-amber-900 border border-zinc-600 bg-amber-900/40 dark:bg-neutral-800 dark:text-white dark:border-teal-800 dark:placeholder-cyan-800">😊
       </button>
       </div>
       {showEmojiPicker && (
