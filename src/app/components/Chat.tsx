@@ -117,7 +117,7 @@ export default function Chat() {
   return (
     <div className='body'>
     <div className="h-screen flex flex-col p-10 chat-container">
-      <div className="flex justify-between mb-4 dark:bg-transparent dark:text-white subpixel-antialiased font-bold font-mono text-4xl tracking-wider">
+      <div className="flex justify-between mb-4 subpixel-antialiased font-bold font-mono text-4xl tracking-wider">
         <h1 className="bebas-neue-regular title dark:montserrat-underline">Edu-Chat Application</h1>
         <p className="status-text text-base bebas-neue-regular dark:montserrat-underline">User: {userStatus}</p>
       </div>
@@ -136,16 +136,16 @@ export default function Chat() {
             ))}
         </select> 
       </div>
-      <div className="flex-1 flex flex-col items-center overflow-y-auto pl-60 pr-60">
+      <div className="flex-1 flex-col p-3 overflow-y-auto ml-auto mr-auto min-w-[800]">
         {messages.map((msg) => (
           <motion.div
             key={msg.id}
-            style={{ minWidth:'200px', height: 'auto' }}
+            style={{width:'auto', height: 'auto' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ x:10, opacity: 1, y: 1 }}
             transition={{ type: "spring" }}
-            className={`pl-4 pt-1 pb-1 pr-4 mb-2 break-words text-pretty w-fit max-w-[75%] rounded-2xl ${
-              msg.sender === 'User' ? 'border-2 border-white ml-auto user-msg'  : 'mr-auto border-2 border-black ai-msg'
+            className={`pl-4 pt-1 pb-1 pr-4 mb-2 break-words text-pretty rounded-2xl ${
+              msg.sender === 'User' ? 'border-2 border-white ml-auto user-msg max-w-[500] min-w-[300]'  : 'mr-auto border-2 border-black ai-msg max-w-[500]'
             }`}
             onClick={() => edit(msg)}
           >
@@ -160,8 +160,8 @@ export default function Chat() {
                   saveEdit();
                 }
               }}
-              rows={1}
-              className="w-full p-1 edit rounded-xl text-white outline-none "
+              style={{ minWidth:'auto', height: 'auto' }}
+              className="w-full p-1 edit rounded-xl text-white outline-none"
               autoFocus
             />
             ) : <ReactMarkdown>{msg.text}</ReactMarkdown> }
@@ -195,12 +195,13 @@ export default function Chat() {
         )}
         <div ref={messagesEndRef} />
       </div>
-      <div className="flex pl-40 pr-40 ml-10">
+      <div className="flex gap-2 m-auto">
       <textarea
         value={input}
+        style={{width:'600px',minWidth:'400px'}}
         onChange={userHandling}
         onKeyDown={handleKeys}
-        className="p-3 mt-2 flex-1 rounded-3xl border-2 border transition delay-50 input-field"
+        className="p-3 mt-2 rounded-3xl border-2 border transition delay-50 input-field flex basis-128 "
         placeholder="Start the Discussion!"
         rows={1}
       />
