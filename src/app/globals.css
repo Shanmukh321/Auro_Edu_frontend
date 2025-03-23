@@ -17,7 +17,7 @@
   --ai-msg-text: #000000;
   --status-text: #6b7280;
   --theme: #e5e7eb;
-  --edit: #2e4062;
+  --edit: rgba(1, 63, 178, 0.611)
 }
 [data-theme="royale"]{
   --title:#e0aa3e;
@@ -40,20 +40,20 @@
   --text-color: #ffffff;
   --input-bg: #374151;
   --input-text: #ffffff;
-  --user-msg-bg: #3b82f6;
+  --user-msg-bg: #3f6cb5;
   --user-msg-text: #ffffff;
   --ai-msg-bg: #4b5563;
   --ai-msg-text: #ffffff;
   --status-text: #9ca3af;
   --theme: #4b5563;
-  --edit: #2e4062;
+  --edit: #6f91ce;
 }
 
 [data-theme="neon"] {
   --bg-color: #000000;
   --text-color: #00ffcc;
   --input-bg: #1a1a1a;
-  --input-text: #ff00ff;
+  --input-text: #00d9ff;
   --user-msg-bg: #000000;
   --user-msg-text:#ffcc00;
   --ai-msg-bg: #ffcc00;
@@ -61,7 +61,7 @@
   --status-text: #ffcc00;
   --theme: #ffcc00;
   --input-border: #a09c9c;
-  --edit: #2e4062;
+  --edit: #353535;
 }
 
 [data-theme="retro"] {
@@ -75,7 +75,7 @@
   --ai-msg-text: #3c2f2f;
   --status-text: #6b4e31;
   --theme: #d9c2a7;
-  --edit: #2e4062;
+  --edit: #be8f7e;
 }
 .edit{
   background-color: var(--edit);
