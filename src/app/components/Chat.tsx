@@ -136,15 +136,16 @@ export default function Chat() {
             ))}
         </select> 
       </div>
-      <div className="flex-1 overflow-y-auto overscroll-contain p-20">
+      <div className="flex-1 flex flex-col items-center overflow-y-auto pl-60 pr-60">
         {messages.map((msg) => (
           <motion.div
             key={msg.id}
+            style={{ minWidth:'200px', height: 'auto' }}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 1 }}
+            animate={{ x:10, opacity: 1, y: 1 }}
             transition={{ type: "spring" }}
-            className={`pl-4 pt-1 pb-1 mb-2 break-words text-pretty rounded-2xl ${
-              msg.sender === 'User' ? 'border-2 border-black user-msg'  : 'border-2 border-black ai-msg'
+            className={`pl-4 pt-1 pb-1 pr-4 mb-2 break-words text-pretty w-fit max-w-[75%] rounded-2xl ${
+              msg.sender === 'User' ? 'border-2 border-white ml-auto user-msg'  : 'mr-auto border-2 border-black ai-msg'
             }`}
             onClick={() => edit(msg)}
           >
@@ -160,7 +161,7 @@ export default function Chat() {
                 }
               }}
               rows={1}
-              className="w-full p-1 edit rounded-xl text-white outline-none"
+              className="w-full p-1 edit rounded-xl text-white outline-none "
               autoFocus
             />
             ) : <ReactMarkdown>{msg.text}</ReactMarkdown> }
@@ -194,7 +195,7 @@ export default function Chat() {
         )}
         <div ref={messagesEndRef} />
       </div>
-      <div className="flex">
+      <div className="flex pl-40 pr-40 ml-10">
       <textarea
         value={input}
         onChange={userHandling}

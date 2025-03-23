@@ -100,6 +100,8 @@ body {
 .chat-container {
   background-color: var(--bg-color);
   color: var(--text-color);
+  border: white;
+  border-radius: 10px;
 }
 
 .input-field {
