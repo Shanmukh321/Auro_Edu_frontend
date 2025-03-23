@@ -2,14 +2,13 @@
 import { useRef, useEffect, useState} from 'react';
 import { motion } from 'framer-motion';
 import { useChatStore } from '../lib/store';
-import ThemeToggle from './ThemeToggle';
 import '../globals.css';
 import ReactMarkdown from 'react-markdown';
 import EmojiPicker from 'emoji-picker-react';
 
 
 export default function Chat() {
-  const { messages,isAItyping,addMessage,setAItyping,clearmessages,userStatus,setUserStatus,messageStatus,editMessage} = useChatStore();
+  const { messages,isAItyping,addMessage,setAItyping,clearmessages,userStatus,setUserStatus,messageStatus,editMessage,theme,setTheme} = useChatStore();
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [input, setInput] = useState('');
   const [editId, setEditId] = useState<number | null>(null);
@@ -19,7 +18,11 @@ export default function Chat() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
-
+  
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  })
+  const themes = ['light', 'dark', 'neon', 'retro','royale'];
   const handleSend = () => {
     if (input.trim()) {
       const messageID = Date.now();
@@ -54,7 +57,7 @@ export default function Chat() {
     setTimeout(() => {
       setAItyping(false)
       const AiMsgId = Date.now()
-      addMessage("Cool! My mistake, let's try to re-initiate the converstion.","Ai")
+      addMessage("Cool! My mistake, let's try to re-initiate the conversation.","Ai")
       setTimeout(() => messageStatus(AiMsgId,'delivered'),500);
     },1000)
   }
@@ -112,19 +115,28 @@ export default function Chat() {
     }  
   }
   return (
-    <div>
-    <div className="h-screen flex flex-col p-10 bg-yellow-400/20 dark:bg-black">
+    <div className='body'>
+    <div className="h-screen flex flex-col p-10 chat-container">
       <div className="flex justify-between mb-4 dark:bg-transparent dark:text-white subpixel-antialiased font-bold font-mono text-4xl tracking-wider">
-        <h1 className="text-slate-950 bebas-neue-regular dark:text-neutral-400 dark:montserrat-underline">Edu-Chat Application</h1>
-        <p className="text-violet-900 text-base bebas-neue-regular dark:text-cyan-400 dark:montserrat-underline">User: {userStatus}</p>
+        <h1 className="bebas-neue-regular title dark:montserrat-underline">Edu-Chat Application</h1>
+        <p className="status-text text-base bebas-neue-regular dark:montserrat-underline">User: {userStatus}</p>
       </div>
       <div className="flex justify-end mb-4">
-        <button className="p-2 bg-blue-900 mr-1 text-white rounded-xl hover:bg-red-900 transition" onClick={clearmessages}> 
+        <button className="p-2 bg-blue-900 mr-1 text-white rounded-xl transition delay-250 hover:-translate-y-1 hover:scale-110 hover:bg-red-900 transition" onClick={clearmessages}> 
             Clear Chat
         </button>
-        <ThemeToggle />
+        <select
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+            className="p-2 rounded transition delay-50 rounded-2xl border text-black theme-selector"
+          >{themes.map((t) => (
+              <option key={t} value={t}>
+                {t.charAt(0).toUpperCase() + t.slice(1)}
+              </option>
+            ))}
+        </select> 
       </div>
-      <div className="flex-1 overflow-y-auto p-20">
+      <div className="flex-1 overflow-y-auto overscroll-contain p-20">
         {messages.map((msg) => (
           <motion.div
             key={msg.id}
@@ -132,7 +144,7 @@ export default function Chat() {
             animate={{ opacity: 1, y: 1 }}
             transition={{ type: "spring" }}
             className={`pl-4 pt-1 pb-1 mb-2 break-words text-pretty rounded-2xl ${
-              msg.sender === 'User' ? 'bg-emerald-900/75 border-2 border-black text-slate-100 dark:bg-teal-900 dark:text-slate-300'  : 'bg-teal-300/30 border-2 border-black text-gray-900 dark:bg-zinc-900 dark:text-slate-300'
+              msg.sender === 'User' ? 'border-2 border-black user-msg'  : 'border-2 border-black ai-msg'
             }`}
             onClick={() => edit(msg)}
           >
@@ -148,7 +160,7 @@ export default function Chat() {
                 }
               }}
               rows={1}
-              className="w-full p-1 bg-teal-900/90 rounded-xl text-white outline-none dark:bg-teal-700"
+              className="w-full p-1 edit rounded-xl text-white outline-none"
               autoFocus
             />
             ) : <ReactMarkdown>{msg.text}</ReactMarkdown> }
@@ -156,7 +168,7 @@ export default function Chat() {
             <span className="text-sm opacity-70">
               {msgStatusIcon(msg.status)}
               {msg.status === 'read' && msg.sender === 'User' ? (
-                <span className="text-red-500">✓✓</span>
+                <span className="text-blue-500">✓✓</span>
               ) : null}
             </span>
           </motion.div>
@@ -187,14 +199,14 @@ export default function Chat() {
         value={input}
         onChange={userHandling}
         onKeyDown={handleKeys}
-        className="p-3 mt-2 flex-1 rounded-3xl border-2 placeholder-stone-950 border border-amber-900/20 bg-amber-900/40 dark:bg-neutral-800 dark:text-slate-200 dark:border-teal-700 dark:border-e dark:placeholder-zinc-400"
+        className="p-3 mt-2 flex-1 rounded-3xl border-2 border transition delay-50 input-field"
         placeholder="Start the Discussion!"
         rows={1}
       />
       <div className={`absolute bottom-2 right-12 text-sm ${input.length > MAX_CHARS ? 'text-red-500' : 'text-gray-400'}`}>
           {input.length}/{MAX_CHARS}
       </div>
-      <button onClick={() => setShowEmojiPicker(!showEmojiPicker)} className="relative mt-2 p-3 rounded-3xl border-2 border-amber-900/20 left-2 placeholder-amber-900 border border-zinc-600 bg-amber-900/40 dark:bg-neutral-800 dark:text-white dark:border-teal-800 dark:placeholder-cyan-800">😊
+      <button onClick={() => setShowEmojiPicker(!showEmojiPicker)} className="relative mt-2 p-3 rounded-3xl transition delay-50 hover:-translate-y-1 hover:scale-110 border-2 left-2 border border-zinc-600 input-field">😊
       </button>
       </div>
       {showEmojiPicker && (

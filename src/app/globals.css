@@ -5,6 +5,133 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Light Theme (default) */
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --input-bg: #f0f0f0;
+  --input-text: #000000;
+  --user-msg-bg: #3b82f6;
+  --user-msg-text: #ffffff;
+  --ai-msg-bg: #e5e7eb;
+  --ai-msg-text: #000000;
+  --status-text: #6b7280;
+  --theme: #e5e7eb;
+  --edit: #2e4062;
+}
+[data-theme="royale"]{
+  --title:#e0aa3e;
+  --bg-color: #00113a;
+  --text-color: #890304;
+  --input-bg: #f8f2bf;
+  --input-text: #000000;
+  --user-msg-bg: #002263;
+  --user-msg-text: #ffffff;
+  --ai-msg-bg: #e8e5c3;
+  --ai-msg-text: #000000;
+  --status-text: #890304;
+  --theme: #e8e5c3;
+  --edit: #0b1e41;
+  --input-border: #6d693f;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1f2937;
+  --text-color: #ffffff;
+  --input-bg: #374151;
+  --input-text: #ffffff;
+  --user-msg-bg: #3b82f6;
+  --user-msg-text: #ffffff;
+  --ai-msg-bg: #4b5563;
+  --ai-msg-text: #ffffff;
+  --status-text: #9ca3af;
+  --theme: #4b5563;
+  --edit: #2e4062;
+}
+
+[data-theme="neon"] {
+  --bg-color: #000000;
+  --text-color: #00ffcc;
+  --input-bg: #1a1a1a;
+  --input-text: #ff00ff;
+  --user-msg-bg: #000000;
+  --user-msg-text:#ffcc00;
+  --ai-msg-bg: #ffcc00;
+  --ai-msg-text: #000000;
+  --status-text: #ffcc00;
+  --theme: #ffcc00;
+  --input-border: #a09c9c;
+  --edit: #2e4062;
+}
+
+[data-theme="retro"] {
+  --bg-color: #f0e7db;
+  --text-color: #3c2f2f;
+  --input-bg: #d9c2a7;
+  --input-text: #3c2f2f;
+  --user-msg-bg: #a16e5b;
+  --user-msg-text: #fff4e6;
+  --ai-msg-bg: #d9c2a7;
+  --ai-msg-text: #3c2f2f;
+  --status-text: #6b4e31;
+  --theme: #d9c2a7;
+  --edit: #2e4062;
+}
+.edit{
+  background-color: var(--edit);
+}
+
+.theme-selector{
+  background-color: var(--theme);
+  color: var(--user-msg-bg);
+}
+.theme-selector:hover{
+  scale:110%;
+  transform: translateX(0px) rotate(0deg) translateY(-5px);
+  transition-timing-function: ease-out;
+  transition-property: all;
+  animation-delay: 150ms;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.chat-container {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.input-field {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border-color: var(--input-border);
+}
+.input-field:hover{
+  transform: translateX(0px) rotate(0deg) translateY(-5px);
+  transition-timing-function: ease-out;
+  transition-property: all;
+  backdrop-filter: blur(50px);
+}
+.title{
+  color:var(--title);
+}
+
+.user-msg {
+  background-color: var(--user-msg-bg);
+  color: var(--user-msg-text);
+}
+
+.ai-msg {
+  background-color: var(--ai-msg-bg);
+  color: var(--ai-msg-text);
+}
+
+.status-text {
+  color: var(--status-text);
+  
+}
+
 .montserrat-underline {
     font-family: "Montserrat Underline", sans-serif;
     font-optical-sizing: auto;
